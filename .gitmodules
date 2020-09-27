@@ -1,0 +1,12 @@
+[submodule ".\\Flame\\vendor\\imgui"]
+	path = .\\Flame\\vendor\\imgui
+	url = https://github.com/BartoszJakubZielonka/imgui.git
+[submodule ".\\Flame\\vendor\\glfw"]
+	path = .\\Flame\\vendor\\glfw
+	url = https://github.com/BartoszJakubZielonka/glfw.git
+[submodule ".\\Flame\\vendor\\glm"]
+	path = .\\Flame\\vendor\\glm
+	url = https://github.com/BartoszJakubZielonka/glm.git
+[submodule ".\\Flame\\vendor\\spdlog"]
+	path = .\\Flame\\vendor\\spdlog
+	url = https://github.com/gabime/spdlog.git
