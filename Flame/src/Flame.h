@@ -16,6 +16,7 @@
 #include "Flame/ImGui/ImGuiLayer.h"
 
 #include "Flame/Renderer/Renderer.h"
+#include "Flame/Renderer/Renderer2D.h"
 #include "Flame/Renderer/RenderCommand.h"
 
 #include "Flame/Renderer/Buffer.h"
@@ -24,8 +25,4 @@
 #include "Flame/Renderer/VertexArray.h"
 
 #include "Flame/Renderer/OrthographicCamera.h"
-//-----------------------------
-
-//---Entry point--------------
-#include "Flame/Core/EntryPoint.h"
 //-----------------------------
