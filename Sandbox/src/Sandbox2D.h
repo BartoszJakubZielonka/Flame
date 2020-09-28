@@ -21,5 +21,7 @@ private:
 	flame::Ref<flame::VertexArray> m_SquareVA;
 	flame::Ref<flame::Shader> m_FlatColorShader;
 
+	flame::Ref<flame::Texture2D> m_CheckerboardTexture;
+
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
