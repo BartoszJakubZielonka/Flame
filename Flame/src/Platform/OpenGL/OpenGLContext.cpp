@@ -14,6 +14,8 @@ namespace flame
 
 	void OpenGLContext::Init()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
 		FL_CORE_ASSERT(status, "Failed to initialize Glad!");
@@ -26,6 +28,8 @@ namespace flame
 
 	void OpenGLContext::SwapBuffers()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glfwSwapBuffers(m_WindowHandle);
 	}
 

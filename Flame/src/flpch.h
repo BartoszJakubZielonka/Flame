@@ -15,6 +15,8 @@
 
 #include "Flame/Core/Log.h"
 
+#include "Flame/Debug/Instrumentor.h"
+
 #ifndef FL_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif

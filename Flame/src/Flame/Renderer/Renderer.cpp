@@ -10,8 +10,16 @@ namespace flame {
 
 	void Renderer::Init()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		RenderCommand::Init();
 		Renderer2D::Init();
+	}
+
+	void Renderer::Shutdown()
+	{
+		FL_PROFILE_FUNCTION();
+		Renderer2D::Shutdown();
 	}
 
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)

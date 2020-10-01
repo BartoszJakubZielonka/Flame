@@ -7,6 +7,8 @@ namespace flame
 {
 	OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height): m_Width(width), m_Height(height)
 	{
+        FL_PROFILE_FUNCTION();
+		
         m_InternalFormat = GL_RGBA8;
         m_DataFormat = GL_RGBA;
 
@@ -22,6 +24,8 @@ namespace flame
 
     OpenGLTexture2D::OpenGLTexture2D(std::string_view path): m_Path(path)
     {
+        FL_PROFILE_FUNCTION();
+		
         int width, height, channels;
         stbi_set_flip_vertically_on_load(1);
         stbi_uc* data = stbi_load(std::string(path).c_str(), &width, &height, &channels, 0);
@@ -62,6 +66,8 @@ namespace flame
 
     OpenGLTexture2D::~OpenGLTexture2D()
     {
+        FL_PROFILE_FUNCTION();
+		
         glDeleteTextures(1, &m_RendererID);
     }
 
@@ -77,6 +83,8 @@ namespace flame
 
     void OpenGLTexture2D::SetData(void* data, uint32_t size)
     {
+        FL_PROFILE_FUNCTION();
+		
         const uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
     	
         FL_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!");
@@ -86,6 +94,8 @@ namespace flame
 
     void OpenGLTexture2D::Bind(uint32_t slot) const
     {
+        FL_PROFILE_FUNCTION();
+		
         glBindTextureUnit(slot, m_RendererID);
     }
 

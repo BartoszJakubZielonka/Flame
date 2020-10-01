@@ -19,6 +19,8 @@ namespace flame
 	
 	void ImGuiLayer::OnAttach()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		//Setup Dear ImGui context.
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -51,6 +53,8 @@ namespace flame
 
 	void ImGuiLayer::OnDetach()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -58,6 +62,8 @@ namespace flame
 
 	void ImGuiLayer::Begin()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -65,6 +71,8 @@ namespace flame
 
 	void ImGuiLayer::End()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::Get();
 

@@ -15,6 +15,7 @@ namespace flame
 
 	Application::Application()
 	{
+		FL_PROFILE_FUNCTION();
 		FL_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
@@ -27,22 +28,36 @@ namespace flame
 		PushOverlay(m_ImGuiLayer);
 	}
 
+	Application::~Application()
+	{
+		FL_PROFILE_FUNCTION();
+		Renderer::Shutdown();
+	}
+
 	void Application::Run()
 	{
+		FL_PROFILE_FUNCTION();
 		while (m_Running)
 		{
+			FL_PROFILE_SCOPE("RunLoop")
 			const auto newTime = glfwGetTime();
 			const auto frameTime = static_cast<float>(newTime) - m_LastFrameTime;
 			m_LastFrameTime = static_cast<float>(newTime);
 
 			if (!m_Minimized)
 			{
-				for (Layer* layer : m_LayerStack)
-					layer->OnUpdate(frameTime);
+				{
+					FL_PROFILE_SCOPE("Layerstack OnUpdate");
+					for (Layer* layer : m_LayerStack)
+						layer->OnUpdate(frameTime);
+				}
 			}
 			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
+			{
+				FL_PROFILE_SCOPE("LayerStack OnImGuiRender")
+				for (Layer* layer : m_LayerStack)
+					layer->OnImGuiRender();
+			}
 			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();
@@ -51,6 +66,7 @@ namespace flame
 
 	void Application::OnEvent(Event& e)
 	{
+		FL_PROFILE_FUNCTION();
 		EventDispatcher dispatcher(e);
 
 		dispatcher.Dispatch<WindowCloseEvent>(FL_BIND_EVENT_FN(OnWindowClose));
@@ -66,12 +82,14 @@ namespace flame
 
 	void Application::PushLayer(Layer* layer)
 	{
+		FL_PROFILE_FUNCTION();
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
+		FL_PROFILE_FUNCTION();
 		m_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
 	}
@@ -94,6 +112,7 @@ namespace flame
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		FL_PROFILE_FUNCTION();
 		if(e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;

@@ -23,16 +23,22 @@ namespace flame
 
 	WindowsWindow::WindowsWindow(const WindowProps& props):m_Window(nullptr), m_Context(nullptr)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		WindowsWindow::Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		WindowsWindow::Shutdown();
 	}
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -157,17 +163,23 @@ namespace flame
 
 	void WindowsWindow::Shutdown()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glfwDestroyWindow(m_Window);
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(const bool enabled)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		if (enabled)
 			glfwSwapInterval(1);
 		else

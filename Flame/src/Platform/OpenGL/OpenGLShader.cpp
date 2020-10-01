@@ -22,6 +22,8 @@ namespace flame
 
 	OpenGLShader::OpenGLShader(std::string_view filepath)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		const auto source = ReadFile(filepath);
 		const auto shaderSource = PreProcess(source);
 		Compile(shaderSource);
@@ -32,6 +34,8 @@ namespace flame
 
 	OpenGLShader::OpenGLShader(std::string_view name, const std::string& vertexSrc, const std::string& fragmentSrc): m_Name(std::string(name))
 	{
+		FL_PROFILE_FUNCTION();
+		
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -40,11 +44,15 @@ namespace flame
 
 	OpenGLShader::~OpenGLShader()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glDeleteProgram(m_RendererID);
 	}
 
 	std::string OpenGLShader::ReadFile(std::string_view filepath)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		std::string result;
 		std::ifstream in(std::string(filepath), std::ios::in | std::ios::binary);
 		if (in)
@@ -65,6 +73,8 @@ namespace flame
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		std::unordered_map<GLenum, std::string> shaderSources;
 
 		const char* typeToken = "#type";
@@ -88,6 +98,8 @@ namespace flame
 
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		const auto program = glCreateProgram();
 
 		FL_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now!")
@@ -160,31 +172,43 @@ namespace flame
 
 	void OpenGLShader::Bind() const
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glUseProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Unbind() const
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glUseProgram(0);
 	}
 
 	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		UploadUniformInt(name, value);
 	}
 
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		UploadUniformFloat3(name, value);
 	}
 
 	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		UploadUniformFloat4(name, value);
 	}
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		UploadUniformMat4(name, value);
 	}
 
@@ -195,6 +219,8 @@ namespace flame
 
 	int OpenGLShader::GetUniformLocation(std::string_view name)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		auto location{ 0 };
 		if (m_UniformLocations.find(std::string(name)) == m_UniformLocations.end())
 		{
@@ -211,42 +237,56 @@ namespace flame
 
 	void OpenGLShader::UploadUniformInt(std::string_view name, int value)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		const auto location = GetUniformLocation(name);
 		glUniform1i(location, value);
 	}
 
 	void OpenGLShader::UploadUniformFloat(std::string_view name, float value)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		const auto location = GetUniformLocation(name);
 		glUniform1f(location, value);
 	}
 
 	void OpenGLShader::UploadUniformFloat2(std::string_view name, const glm::vec2& value)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		const auto location = GetUniformLocation(name);
 		glUniform2f(location, value.x, value.y);
 	}
 
 	void OpenGLShader::UploadUniformFloat3(std::string_view name, const glm::vec3& value)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		const auto location = GetUniformLocation(name);
 		glUniform3f(location, value.x, value.y, value.z);
 	}
 
 	void OpenGLShader::UploadUniformFloat4(std::string_view name, const glm::vec4& value)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		const auto location = GetUniformLocation(name);
 		glUniform4f(location, value.x, value.y, value.z, value.w);
 	}
 
 	void OpenGLShader::UploadUniformMat3(std::string_view name, const glm::mat3& matrix)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		const auto location = GetUniformLocation(name);
 		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
 	void OpenGLShader::UploadUniformMat4(std::string_view name, const glm::mat4& matrix)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		const auto location = GetUniformLocation(name);
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}

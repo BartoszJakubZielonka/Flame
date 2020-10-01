@@ -8,6 +8,7 @@ namespace flame
 {
 	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation): m_AspectRatio(aspectRatio), m_Rotation(rotation), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel)
 	{
+		FL_PROFILE_FUNCTION();
 	}
 
 	OrthographicCamera& OrthographicCameraController::GetCamera()
@@ -22,6 +23,8 @@ namespace flame
 
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		if (Input::IsKeyPressed(FL_KEY_D))
 			m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
 		else if (Input::IsKeyPressed(FL_KEY_A))
@@ -47,6 +50,8 @@ namespace flame
 
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(FL_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(FL_BIND_EVENT_FN(OrthographicCameraController::OnWindowResize));
@@ -64,6 +69,8 @@ namespace flame
 
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		m_ZoomLevel -= e.GetYOffset() * 0.25f;
 		m_ZoomLevel = glm::max(m_ZoomLevel, 0.25f);
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
@@ -72,6 +79,8 @@ namespace flame
 
 	bool OrthographicCameraController::OnWindowResize(WindowResizeEvent& e)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		m_AspectRatio = static_cast<float>(e.GetWidth()) / static_cast<float>(e.GetHeight());
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;

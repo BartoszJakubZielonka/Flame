@@ -28,26 +28,36 @@ namespace flame
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glCreateVertexArrays(1, &m_RendererID);
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glDeleteVertexArrays(1, &m_RendererID);
 	}
 
 	void OpenGLVertexArray::Bind() const
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glBindVertexArray(m_RendererID);
 	}
 
 	void OpenGLVertexArray::Unbind() const
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glBindVertexArray(0);
 	}
 
 	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		FL_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
 		glBindVertexArray(m_RendererID);
@@ -72,6 +82,8 @@ namespace flame
 
 	void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 	{
+		FL_PROFILE_FUNCTION();
+		
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();
 
