@@ -23,7 +23,7 @@ public:
 		};
 
 		flame::Ref<flame::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(flame::VertexBuffer::Create(vertices.data(), sizeof(vertices)));
+		vertexBuffer = flame::VertexBuffer::Create(vertices.data(), sizeof(vertices));
 		flame::BufferLayout layout = {
 			{ flame::ShaderDataType::Float3, "a_Position" },
 			{ flame::ShaderDataType::Float4, "a_Color" }
@@ -33,7 +33,7 @@ public:
 
 		std::array<uint32_t, 3> indices = { 0, 1, 2 };
 		flame::Ref<flame::IndexBuffer> indexBuffer;
-		indexBuffer.reset(flame::IndexBuffer::Create(indices.data(), sizeof(indices) / sizeof(uint32_t)));
+		indexBuffer = flame::IndexBuffer::Create(indices.data(), sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVertexArray = flame::VertexArray::Create();
@@ -46,7 +46,7 @@ public:
 		};
 
 		flame::Ref<flame::VertexBuffer> squareVB;
-		squareVB.reset(flame::VertexBuffer::Create(squareVertices.data(), sizeof(squareVertices)));
+		squareVB = flame::VertexBuffer::Create(squareVertices.data(), sizeof(squareVertices));
 		squareVB->SetLayout({
 			{ flame::ShaderDataType::Float3, "a_Position" },
 			{ flame::ShaderDataType::Float2, "a_TexCoord" }
@@ -55,7 +55,7 @@ public:
 
 		std::array<uint32_t, 6> squareIndices = { 0, 1, 2, 2, 3, 0 };
 		flame::Ref<flame::IndexBuffer> squareIB;
-		squareIB.reset(flame::IndexBuffer::Create(squareIndices.data(), sizeof(squareIndices) / sizeof(uint32_t)));
+		squareIB = flame::IndexBuffer::Create(squareIndices.data(), sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVertexArray->SetIndexBuffer(squareIB);
 
 		std::string vertexSrc = R"(
