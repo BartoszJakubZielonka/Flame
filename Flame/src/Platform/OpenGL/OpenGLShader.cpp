@@ -170,6 +170,11 @@ namespace flame
 			glDetachShader(program, id);
 	}
 
+	void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
+	{
+		UploadUniformIntArray(name, values, count);
+	}
+
 	void OpenGLShader::Bind() const
 	{
 		FL_PROFILE_FUNCTION();
@@ -248,6 +253,12 @@ namespace flame
 		
 		const auto location = GetUniformLocation(name);
 		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::UploadUniformIntArray(const std::string& name, int* values, uint32_t count)
+	{
+		const auto location = GetUniformLocation(name);
+		glUniform1iv(location, count, values);
 	}
 
 	void OpenGLShader::UploadUniformFloat(std::string_view name, float value)

@@ -30,6 +30,7 @@ namespace flame
 		[[nodiscard]] const std::string& GetName() const override;
 
 		void UploadUniformInt(std::string_view name, int value);
+		void UploadUniformIntArray(const std::string& name, int* values, uint32_t count);
 
 		void UploadUniformFloat(std::string_view name, float value);
 		void UploadUniformFloat2(std::string_view name, const glm::vec2& value);
@@ -43,6 +44,9 @@ namespace flame
 		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
 		void Compile(const std::unordered_map<GLenum, std::string>& shaderSource);
 
+	public:
+		void SetIntArray(const std::string& name, int* values, uint32_t count) override;
+	private:
 		std::unordered_map<std::string, int> m_UniformLocations;
 		uint32_t m_RendererID;
 		std::string m_Name;
