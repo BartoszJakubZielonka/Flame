@@ -28,6 +28,8 @@ namespace flame
 		void PushOverlay(Layer* layer);
 
 		inline Window& GetWindow();
+
+		void Close();
 		
 		inline static Application& Get();
 	private:

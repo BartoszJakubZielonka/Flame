@@ -94,6 +94,11 @@ namespace flame
 		layer->OnAttach();
 	}
 
+	void Application::Close()
+	{
+		m_Running = false;
+	}
+
 	Window& Application::GetWindow()
 	{
 		return *m_Window;
