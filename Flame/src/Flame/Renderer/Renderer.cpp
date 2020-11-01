@@ -1,6 +1,6 @@
 #include "flpch.h"
-#include "Renderer.h"
-#include "Renderer2D.h"
+#include "Flame/Renderer/Renderer.h"
+#include "Flame/Renderer/Renderer2D.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
@@ -19,6 +19,7 @@ namespace flame {
 	void Renderer::Shutdown()
 	{
 		FL_PROFILE_FUNCTION();
+
 		Renderer2D::Shutdown();
 	}
 
@@ -39,8 +40,8 @@ namespace flame {
 	void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
 	{
 		shader->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
+		shader->SetMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+		shader->SetMat4("u_Transform", transform);
 
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);

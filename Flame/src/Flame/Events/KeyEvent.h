@@ -2,13 +2,14 @@
 #include "flpch.h"
 
 #include "Event.h"
+#include "Flame/Core/Input.h"
 
 namespace flame
 {
-	class FLAME_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
-		inline int GetKeyCode() const
+		int GetKeyCode() const
 		{
 			return m_KeyCode;
 		}
@@ -22,14 +23,14 @@ namespace flame
 		int32_t m_KeyCode;
 	};
 
-	class FLAME_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatCount) : KeyEvent(keycode), m_RepeatCount(repeatCount)
 		{
 		}
 
-		inline int GetRepeatCount() const
+		int GetRepeatCount() const
 		{
 			return m_RepeatCount;
 		}
@@ -46,7 +47,7 @@ namespace flame
 		int m_RepeatCount;
 	};
 
-	class FLAME_API KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode) : KeyEvent(keycode)
@@ -63,7 +64,7 @@ namespace flame
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class FLAME_API KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keyCode): KeyEvent(keyCode){}

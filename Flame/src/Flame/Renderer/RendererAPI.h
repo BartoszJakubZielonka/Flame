@@ -6,7 +6,7 @@
 
 namespace flame
 { 
-	class FLAME_API RendererAPI
+	class RendererAPI
 	{
 	public:
 		enum class API
@@ -21,7 +21,8 @@ namespace flame
 
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) = 0;
 
-		inline static API GetAPI();
+		static API GetAPI();
+		static Scope<RendererAPI> Create();
 	private:
 		static API s_API;
 	};

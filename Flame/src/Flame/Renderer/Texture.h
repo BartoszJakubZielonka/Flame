@@ -1,7 +1,7 @@
 #pragma once
 #include <any>
 #include <string>
-#include "Flame/Core/Core.h"
+#include "Flame/Core/Base.h"
 
 namespace flame
 {

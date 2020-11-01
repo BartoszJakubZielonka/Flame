@@ -1,7 +1,7 @@
 #include "flpch.h"
-#include "Shader.h"
+#include "Flame/Renderer/Shader.h"
 
-#include "Renderer.h"
+#include "Flame/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace flame

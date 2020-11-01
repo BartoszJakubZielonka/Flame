@@ -5,15 +5,15 @@
 
 namespace flame
 {
-	class FLAME_API WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(uint32_t width, uint32_t height): m_Width(width), m_Height(height)
 		{
 		}
 
-		inline uint32_t GetWidth() const { return m_Width; }
-		inline uint32_t GetHeight() const { return m_Height; }
+		uint32_t GetWidth() const { return m_Width; }
+		uint32_t GetHeight() const { return m_Height; }
 
 		[[nodiscard]] std::string ToString() const override
 		{
@@ -28,7 +28,7 @@ namespace flame
 		uint32_t m_Width, m_Height;
 	};
 
-	class FLAME_API WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() = default;
@@ -37,7 +37,7 @@ namespace flame
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class FLAME_API AppTickEvent : public Event
+	class AppTickEvent : public Event
 	{
 	public:
 		AppTickEvent() = default;
@@ -46,7 +46,7 @@ namespace flame
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class FLAME_API AppUpdateEvent : public Event
+	class AppUpdateEvent : public Event
 	{
 	public:
 		AppUpdateEvent() = default;
@@ -55,7 +55,7 @@ namespace flame
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class FLAME_API AppRenderEvent : public Event
+	class AppRenderEvent : public Event
 	{
 	public:
 		AppRenderEvent() = default;

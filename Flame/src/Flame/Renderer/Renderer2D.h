@@ -1,8 +1,8 @@
 #pragma once
 
-#include "OrthographicCamera.h"
+#include "Flame/Renderer/OrthographicCamera.h"
 
-#include "Texture.h"
+#include "Flame/Renderer/Texture.h"
 
 namespace flame
 {
@@ -30,8 +30,8 @@ namespace flame
 		// Stats
 		struct Statistics
 		{
-			uint32_t DrawCalls = 0;
-			uint32_t QuadCount = 0;
+			uint32_t DrawCalls{ 0 };
+			uint32_t QuadCount{ 0 };
 
 			uint32_t GetTotalVertexCount() const { return QuadCount * 4; }
 			uint32_t GetTotalIndexCount() const { return QuadCount * 6; }

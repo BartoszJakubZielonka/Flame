@@ -1,7 +1,7 @@
 #include "flpch.h"
-#include "Texture.h"
+#include "Flame/Renderer/Texture.h"
 
-#include "Renderer.h"
+#include "Flame/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace flame

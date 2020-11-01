@@ -1,9 +1,9 @@
 #include "flpch.h"
-#include "ImGuiLayer.h"
+#include "Flame/ImGui/ImGuiLayer.h"
 
-#include "imgui.h"
-#include "examples/imgui_impl_glfw.h"
-#include "examples/imgui_impl_opengl3.h"
+#include <imgui.h>
+#include <examples/imgui_impl_glfw.h>
+#include <examples/imgui_impl_opengl3.h>
 
 #include "Flame/Core/Application.h"
 
@@ -13,7 +13,7 @@
 
 namespace flame
 {
-	ImGuiLayer::ImGuiLayer(): Layer("ImGuiLayer"), m_Time(0.0f)
+	ImGuiLayer::ImGuiLayer(): Layer("ImGuiLayer")
 	{
 	}
 	
@@ -60,6 +60,13 @@ namespace flame
 		ImGui::DestroyContext();
 	}
 
+	void ImGuiLayer::OnEvent(Event& e)
+	{
+/*		ImGuiIO& io = ImGui::GetIO();
+		e.Handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
+		e.Handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard; */
+	}
+
 	void ImGuiLayer::Begin()
 	{
 		FL_PROFILE_FUNCTION();
@@ -90,11 +97,4 @@ namespace flame
 			glfwMakeContextCurrent(backup_current_context);
 		}
 	}
-
-	void ImGuiLayer::OnImGuiRender()
-	{
-		static bool show{ true };
-	}
-
-	
 }

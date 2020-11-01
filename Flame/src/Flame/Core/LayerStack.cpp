@@ -3,14 +3,13 @@
 
 namespace flame
 {
-	LayerStack::LayerStack():m_LayerInsertIndex(0)
-	{
-	}
-
 	LayerStack::~LayerStack()
 	{
 		for (Layer* layer : m_Layers)
+		{
+			layer->OnDetach();
 			delete layer;
+		}
 	}
 
 	void LayerStack::PushLayer(Layer* layer)
@@ -38,7 +37,9 @@ namespace flame
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 		if (it != m_Layers.end())
+		{
 			m_Layers.erase(it);
+		}
 	}
 
 	std::vector<Layer*>::iterator LayerStack::begin()

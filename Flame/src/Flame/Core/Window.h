@@ -1,7 +1,7 @@
 #pragma once
 #include "flpch.h"
 
-#include "Flame/Core/Core.h"
+#include "Flame/Core/Base.h"
 #include "Flame/Events/Event.h"
 
 namespace flame
@@ -17,7 +17,7 @@ namespace flame
 		}
 	};
 
-	class FLAME_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
@@ -36,6 +36,6 @@ namespace flame
 
 		virtual void* GetNativeWindow() const = 0;
 
-		static Window* Create(const WindowProps& props = WindowProps());
+		static Scope<Window> Create(const WindowProps& props = WindowProps());
 	};
 }

@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Flame/Core/Core.h"
+#include "Flame/Core/Base.h"
 #include "Layer.h"
 
 namespace flame
 {
 
-	class FLAME_API LayerStack
+	class LayerStack
 	{
 	public:
-		LayerStack();
+		LayerStack() = default;
 		~LayerStack();
 
 		void PushLayer(Layer* layer);
@@ -19,11 +19,12 @@ namespace flame
 
 		std::vector<Layer*>::iterator begin();
 		std::vector<Layer*>::const_iterator begin() const;
+
 		std::vector<Layer*>::iterator end();
 		std::vector<Layer*>::const_iterator end() const;
 	private:
 		std::vector<Layer*> m_Layers;
-		unsigned int m_LayerInsertIndex;
+		unsigned int m_LayerInsertIndex{ 0 };
 	};
 
 }

@@ -1,6 +1,6 @@
 workspace "Flame"
-    architecture "x64"
-    startproject "Sandbox"
+    architecture "x86_64"
+    startproject "Flame-Editor"
 
     configurations
     {
@@ -8,6 +8,11 @@ workspace "Flame"
         "Release",
         "Dist"
     }
+
+    flags
+	{
+		"MultiProcessorCompile"
+	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -19,9 +24,11 @@ IncludeDir["imgui"] = "Flame/vendor/imgui"
 IncludeDir["glm"] = "Flame/vendor/glm"
 IncludeDir["stb_image"] = "Flame/vendor/stb_image"
 
-include "Flame/vendor/glfw"
-include "Flame/vendor/glad"
-include "Flame/vendor/imgui"
+group "Dependencies"
+    include "Flame/vendor/glfw"
+    include "Flame/vendor/glad"
+    include "Flame/vendor/imgui"
+group ""
 
 project "Flame"
     location "Flame"
@@ -48,7 +55,8 @@ project "Flame"
 
     defines
     {
-        "_CRT_SECURE_NO_WARNINGS"
+        "_CRT_SECURE_NO_WARNINGS",
+        "GLFW_INCLUDE_NONE"
     }
 
     includedirs
@@ -75,11 +83,6 @@ project "Flame"
 
         defines 
         {
-           "FL_PLATFORM_WINDOWS",
-           "FL_BUILD_DLL",
-           "FL_DYNAMIC_LINK",
-           "FL_ENABLE_ASSERTS",
-           "GLFW_INCLUDE_NONE"
         }
     
     filter "configurations:Debug"
@@ -96,6 +99,53 @@ project "Flame"
         defines "FL_DIST"
         runtime "Release"
         optimize "on"
+
+project "Flame-Editor"
+    location "Flame-Editor"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++17"
+    staticruntime "on"
+
+    targetdir("bin/" .. outputdir .. "/%{prj.name}")
+    objdir("bin/int/" .. outputdir .. "/%{prj.name}")
+
+    files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+    includedirs
+	{
+		"Flame/vendor/spdlog/include",
+		"Flame/src",
+		"Flame/vendor",
+		"%{IncludeDir.glm}"
+    }
+    
+    links
+	{
+		"Flame"
+    }
+    
+    filter "system:windows"
+        systemversion "latest"
+
+	filter "configurations:Debug"
+		defines "FL_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "FL_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "FL_DIST"
+		runtime "Release"
+		optimize "on"
 
 project "Sandbox"
     location "Sandbox"
@@ -129,11 +179,6 @@ project "Sandbox"
     filter "system:windows"
         systemversion "latest"
 
-        defines 
-        {
-           "FL_PLATFORM_WINDOWS"
-        }
-    
     filter "configurations:Debug"
         defines "FL_DEBUG"
         runtime "Debug"

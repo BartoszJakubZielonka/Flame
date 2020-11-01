@@ -5,7 +5,7 @@
 namespace flame
 {
 
-	class FLAME_API OpenGLVertexBuffer final : public VertexBuffer
+	class OpenGLVertexBuffer final : public VertexBuffer
 	{
 	public:
 		OpenGLVertexBuffer(uint32_t size);
@@ -23,7 +23,7 @@ namespace flame
 		BufferLayout m_Layout;
 	};
 
-	class FLAME_API OpenGLIndexBuffer final : public IndexBuffer
+	class OpenGLIndexBuffer final : public IndexBuffer
 	{
 	public:
 		OpenGLIndexBuffer(uint32_t* indices, uint32_t count);

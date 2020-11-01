@@ -1,13 +1,11 @@
 #include "flpch.h"
-#include "WindowsInput.h"
+#include "Platform/Windows/WindowsInput.h"
 
 #include "Flame/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace flame
 {
-	Input* Input::s_Instance = new WindowsInput();
-
 	bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());

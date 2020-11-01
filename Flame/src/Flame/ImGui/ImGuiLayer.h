@@ -9,7 +9,7 @@
 namespace flame
 {
 
-	class FLAME_API ImGuiLayer: public Layer
+	class ImGuiLayer: public Layer
 	{
 	public:
 		ImGuiLayer();
@@ -17,12 +17,12 @@ namespace flame
 
 		void OnAttach() override;
 		void OnDetach() override;
-		void OnImGuiRender() override;
+		void OnEvent(Event& e) override;
 
 		void Begin();
 		void End();
 	private:		
-		float m_Time;
+		float m_Time{ 0.0f };
 	};
 
 }

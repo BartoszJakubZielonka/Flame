@@ -1,7 +1,7 @@
 #pragma once
 #include "flpch.h"
 
-#include "Flame/Core/Core.h"
+#include "Flame/Core/Base.h"
 
 namespace flame
 {
@@ -30,7 +30,7 @@ namespace flame
 
 	#define EVENT_CLASS_CATEGORY(category) int GetCategoryFlags() const override { return category; }
 
-	class FLAME_API Event
+	class Event
 	{
 		friend class EventDispatcher;
 	public:
@@ -42,13 +42,13 @@ namespace flame
 		[[nodiscard]] virtual int GetCategoryFlags() const = 0;
 		[[nodiscard]] virtual std::string ToString() const { return GetName(); }
 
-		inline bool IsInCategory(EventCategory category) const
+		bool IsInCategory(EventCategory category) const
 		{
 			return GetCategoryFlags() & category;
 		}
 	};
 
-	class FLAME_API EventDispatcher
+	class EventDispatcher
 	{
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;

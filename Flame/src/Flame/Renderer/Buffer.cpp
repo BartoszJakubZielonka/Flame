@@ -1,7 +1,7 @@
 #include "flpch.h"
-#include "Buffer.h"
+#include "Flame/Renderer/Buffer.h"
 
-#include "Renderer.h"
+#include "Flame/Renderer/Renderer.h"
 
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
@@ -49,12 +49,12 @@ namespace flame
 		return nullptr;
 	}
 	
-	inline uint32_t BufferLayout::GetStride() const
+	uint32_t BufferLayout::GetStride() const
 	{
 		return m_Stride;
 	}
 
-	inline const std::vector<BufferElement>& BufferLayout::GetElements() const
+	const std::vector<BufferElement>& BufferLayout::GetElements() const
 	{
 		return m_Elements;
 	}

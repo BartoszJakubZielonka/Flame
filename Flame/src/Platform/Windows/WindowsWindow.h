@@ -15,15 +15,15 @@ namespace flame
 
 		void OnUpdate() override;
 
-		[[nodiscard]] inline uint32_t GetWidth() const override;
-		[[nodiscard]] inline uint32_t GetHeight() const override;
+		[[nodiscard]] uint32_t GetWidth() const override;
+		[[nodiscard]] uint32_t GetHeight() const override;
 
 		//Window attributes.
-		inline void SetEventCallback(const EventCallbackFn& callback) override;
+		void SetEventCallback(const EventCallbackFn& callback) override;
 		void SetVSync(bool enabled) override;
 		[[nodiscard]] bool IsVSync() const override;
 
-		inline void* GetNativeWindow() const override { return m_Window; }
+		void* GetNativeWindow() const override { return m_Window; }
 		
 	private:
 		virtual void Init(const WindowProps& props);

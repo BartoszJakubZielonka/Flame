@@ -1,7 +1,7 @@
 #include "flpch.h"
-#include "VertexArray.h"
+#include "Flame/Renderer/VertexArray.h"
 
-#include "Renderer.h"
+#include "Flame/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace flame

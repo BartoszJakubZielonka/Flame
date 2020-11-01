@@ -15,6 +15,8 @@ namespace flame
 		OrthographicCamera& GetCamera();
 		const OrthographicCamera& GetCamera() const;
 		
+		void OnResize(float width, float height);
+
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
 

@@ -3,7 +3,6 @@
 
 namespace flame
 {
-
 	class WindowsInput : public Input
 	{
 	protected:

@@ -2,18 +2,25 @@
 
 #include <memory>
 
-#ifdef  FL_PLATFORM_WINDOWS
-	#ifdef FL_DYNAMIC_LINK
-		#ifdef FL_BUILD_DLL
-			#define FLAME_API __declspec(dllexport)
-		#else
-			#define FLAME_API __declspec(dllimport)
-		#endif
+// Platform detection using predefined macros.
+#ifdef _WIN32
+	// Windows x64/x86
+	#ifdef _WIN64
+		#define FL_PLATFORM_WINDOWS
 	#else
-		#define FLAME_API
+		#error "x86 Builds are not supported!"
 	#endif
+#endif // End of platform detection
+
+#ifdef FL_DEBUG
+	#if defined(FL_PLATFORM_WINDOWS)
+		#define FL_DEBUGBREAK() __debugbreak()
+	#else
+		#error "Platform doesn't support debugbreak yet!"
+	#endif
+	#define FL_ENABLE_ASSERTS
 #else
-	#error Flame only support Windows!
+	#define FL_DEBUGBREAK()
 #endif
 
 #ifdef FL_ENABLE_ASSERTS

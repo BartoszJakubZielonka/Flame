@@ -63,7 +63,7 @@ namespace flame
 		}
 	};
 
-	class FLAME_API BufferLayout
+	class BufferLayout
 	{
 	public:
 		BufferLayout() = default;
@@ -72,8 +72,8 @@ namespace flame
 			CalculateOffsetsAndStride();
 		}
 
-		inline uint32_t GetStride() const;
-		inline const std::vector<BufferElement>& GetElements() const;
+		uint32_t GetStride() const;
+		const std::vector<BufferElement>& GetElements() const;
 
 		std::vector<BufferElement>::iterator begin();
 		std::vector<BufferElement>::iterator end();
@@ -86,7 +86,7 @@ namespace flame
 		uint32_t m_Stride;
 	};
 
-	class FLAME_API VertexBuffer
+	class VertexBuffer
 	{
 	public:
 		VertexBuffer() = default;
@@ -105,7 +105,7 @@ namespace flame
 	};
 
 	//Currently Flame only supports 32-bit index buffer.
-	class FLAME_API IndexBuffer
+	class IndexBuffer
 	{
 	public:
 		IndexBuffer() = default;

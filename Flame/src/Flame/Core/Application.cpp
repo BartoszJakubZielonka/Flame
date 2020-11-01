@@ -1,11 +1,11 @@
 #include "flpch.h"
-#include "Application.h"
+#include "Flame/Core/Application.h"
 
 #include "Flame/Core/Log.h"
 
-#include "Flame/Core/Timestep.h"
-
 #include "Flame/Renderer/Renderer.h"
+
+#include "Flame/Core/Input.h"
 
 #include <GLFW/glfw3.h>
 
@@ -13,13 +13,13 @@ namespace flame
 {
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application()
+	Application::Application(const std::string& name)
 	{
 		FL_PROFILE_FUNCTION();
+
 		FL_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
-
-		m_Window = Scope<Window>(Window::Create());
+		m_Window = Window::Create(WindowProps(name));
 		m_Window->SetEventCallback(FL_BIND_EVENT_FN(OnEvent));
 
 		Renderer::Init();
@@ -37,6 +37,7 @@ namespace flame
 	void Application::Run()
 	{
 		FL_PROFILE_FUNCTION();
+		
 		while (m_Running)
 		{
 			FL_PROFILE_SCOPE("RunLoop")
@@ -67,6 +68,7 @@ namespace flame
 	void Application::OnEvent(Event& e)
 	{
 		FL_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 
 		dispatcher.Dispatch<WindowCloseEvent>(FL_BIND_EVENT_FN(OnWindowClose));
@@ -83,6 +85,7 @@ namespace flame
 	void Application::PushLayer(Layer* layer)
 	{
 		FL_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
@@ -90,6 +93,7 @@ namespace flame
 	void Application::PushOverlay(Layer* layer)
 	{
 		FL_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
 	}

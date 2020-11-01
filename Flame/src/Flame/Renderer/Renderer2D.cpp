@@ -1,5 +1,5 @@
 #include "flpch.h"
-#include "Renderer2D.h"
+#include "Flame/Renderer/Renderer2D.h"
 
 #include "Flame/Renderer/VertexArray.h"
 #include "Flame/Renderer/Shader.h"
@@ -106,6 +106,8 @@ namespace flame
 	void Renderer2D::Shutdown()
 	{
 		FL_PROFILE_FUNCTION();
+
+		delete[] s_Data.QuadVertexBufferBase;
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)

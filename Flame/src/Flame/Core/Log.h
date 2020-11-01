@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Flame/Core/Base.h"
 
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
@@ -8,7 +8,7 @@
 namespace flame
 {
 
-	class FLAME_API Log
+	class Log
 	{
 	public:
 		Log() = default;
@@ -16,8 +16,8 @@ namespace flame
 
 		static void Init();
 
-		inline static Ref < spdlog::logger > & GetCoreLogger();
-		inline static Ref < spdlog::logger > & GetClientLogger();
+		static Ref < spdlog::logger > & GetCoreLogger();
+		static Ref < spdlog::logger > & GetClientLogger();
 	private:
 		static Ref<spdlog::logger> s_CoreLogger;
 		static Ref<spdlog::logger> s_ClientLogger;
