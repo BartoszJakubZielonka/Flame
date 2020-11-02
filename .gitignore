@@ -38,4 +38,5 @@ x64/
 bin/
 Debug/
 v16/
-.vs\
+.vs/
+.vscode/
