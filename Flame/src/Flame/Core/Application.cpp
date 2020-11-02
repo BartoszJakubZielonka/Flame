@@ -103,6 +103,11 @@ namespace flame
 		m_Running = false;
 	}
 
+	ImGuiLayer* Application::GetImGuiLayer()
+	{
+		return m_ImGuiLayer;
+	}
+
 	Window& Application::GetWindow()
 	{
 		return *m_Window;

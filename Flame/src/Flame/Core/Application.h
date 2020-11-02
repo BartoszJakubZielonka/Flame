@@ -29,6 +29,8 @@ namespace flame
 
 		void Close();
 		
+		ImGuiLayer* GetImGuiLayer();
+
 		static Application& Get();
 	private:
 		void Run();
