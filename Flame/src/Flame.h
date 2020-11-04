@@ -16,6 +16,10 @@
 
 #include "Flame/ImGui/ImGuiLayer.h"
 
+#include "Flame/Scene/Scene.h"
+#include "Flame/Scene/Entity.h"
+#include "Flame/Scene/Components.h"
+
 //---Renderer--------------
 #include "Flame/Renderer/Renderer.h"
 #include "Flame/Renderer/Renderer2D.h"
