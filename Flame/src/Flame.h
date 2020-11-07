@@ -18,6 +18,7 @@
 
 #include "Flame/Scene/Scene.h"
 #include "Flame/Scene/Entity.h"
+#include "Flame/Scene/ScriptableEntity.h"
 #include "Flame/Scene/Components.h"
 
 //---Renderer--------------

@@ -11,7 +11,7 @@ namespace flame
 	class Scene
 	{
 	public:
-		Scene();
+		Scene() = default;
 		~Scene() = default;
 
 		Entity CreateEntity(const std::string& name = std::string());
