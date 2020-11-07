@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Flame/Renderer/Camera.h"
+#include "SceneCamera.h"
 
 namespace flame {
 
@@ -38,12 +38,11 @@ namespace flame {
 
 	struct CameraComponent
 	{
-		Camera Camera;
-		bool Primary = true; // TODO: think about moving to Scene
+		SceneCamera Camera;
+		bool Primary{ true }; // TODO: think about moving to Scene
+		bool FixedAspectRatio{ false };
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-		CameraComponent(const glm::mat4& projection)
-			: Camera(projection) {}
 	};
 }
