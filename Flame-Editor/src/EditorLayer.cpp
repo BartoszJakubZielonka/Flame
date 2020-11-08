@@ -38,17 +38,17 @@ namespace flame {
 		class CameraController : public ScriptableEntity
 		{
 		public:
-			void OnCreate()
+			void OnCreate() override
 			{
 				auto& transform = GetComponent<TransformComponent>().Transform;
 				transform[3][0] = rand() % 10 - 5.0f;
 			}
 
-			void OnDestroy()
+			void OnDestroy() override
 			{
 			}
 
-			void OnUpdate(Timestep ts)
+			void OnUpdate(Timestep ts) override
 			{
 				auto& transform{ GetComponent<TransformComponent>().Transform };
 				
@@ -65,7 +65,10 @@ namespace flame {
 			}
 		};
 
+		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
 
 	void EditorLayer::OnDetach()
@@ -168,9 +171,11 @@ namespace flame {
 			ImGui::EndMenuBar();
 		}
 
+		m_SceneHierarchyPanel.OnImGuiRender();
+		
 		ImGui::Begin("Settings");
 
-		auto stats = Renderer2D::GetStats();
+		const auto stats = Renderer2D::GetStats();
 		ImGui::Text("Renderer2D Stats:");
 		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
 		ImGui::Text("Quads: %d", stats.QuadCount);
@@ -213,10 +218,10 @@ namespace flame {
 		m_ViewportHovered = ImGui::IsWindowHovered();
 		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
 
-		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+		const ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 		m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
-		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+		const uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image(reinterpret_cast<void*>(textureID), ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 		ImGui::End();
 		ImGui::PopStyleVar();
