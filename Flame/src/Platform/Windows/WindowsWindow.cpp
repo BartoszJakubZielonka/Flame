@@ -9,6 +9,8 @@
 
 namespace flame
 {
+	float Window::s_HighDPIScaleFactor{ 1.0f };
+	
 	static bool s_GLFWInitialized{ false };
 
 	static void GLFWErrorCallback(const int error, const char* description)
@@ -47,6 +49,16 @@ namespace flame
 			FL_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
 			s_GLFWInitialized = true;
+		}
+
+		GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+		float xscale, yscale;
+		glfwGetMonitorContentScale(monitor, &xscale, &yscale);
+
+		if (xscale > 1.0f || yscale > 1.0f)
+		{
+			s_HighDPIScaleFactor = xscale;
+			glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
 		}
 
 		m_Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), m_Data.Title.c_str(), nullptr, nullptr);

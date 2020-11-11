@@ -12,7 +12,7 @@ namespace flame
 		uint32_t Width;
 		uint32_t Height;
 
-		WindowProps(std::string_view title = "FlameEngine", uint32_t width = 1280, uint32_t height = 720) : Title(title), Width(width), Height(height)
+		WindowProps(std::string_view title = "FlameEngine", uint32_t width = 1600, uint32_t height = 900) : Title(title), Width(width), Height(height)
 		{
 		}
 	};
@@ -37,5 +37,7 @@ namespace flame
 		virtual void* GetNativeWindow() const = 0;
 
 		static Scope<Window> Create(const WindowProps& props = WindowProps());
+	public:
+		static float s_HighDPIScaleFactor;
 	};
 }
