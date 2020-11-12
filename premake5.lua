@@ -24,11 +24,13 @@ IncludeDir["imgui"] = "Flame/vendor/imgui"
 IncludeDir["glm"] = "Flame/vendor/glm"
 IncludeDir["stb_image"] = "Flame/vendor/stb_image"
 IncludeDir["entt"] = "Flame/vendor/entt/include"
+IncludeDir["yaml_cpp"] = "Flame/vendor/yaml-cpp/include"
 
 group "Dependencies"
     include "Flame/vendor/glfw"
     include "Flame/vendor/glad"
     include "Flame/vendor/imgui"
+    include "Flame/vendor/yaml-cpp"
 group ""
 
 project "Flame"
@@ -69,7 +71,8 @@ project "Flame"
         "%{IncludeDir.imgui}",
         "%{IncludeDir.glm}",
         "%{IncludeDir.stb_image}",
-        "%{IncludeDir.entt}"
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.yaml_cpp}"
     }
 
     links
@@ -77,6 +80,7 @@ project "Flame"
         "GLFW",
         "GLAD",
         "ImGui",
+        "yaml-cpp",
         "opengl32.lib"
     }
 
